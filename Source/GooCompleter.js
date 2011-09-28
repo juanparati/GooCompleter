@@ -1,21 +1,25 @@
 /*
 ---
-script: goocompleter.js
-license: GNU/GPL license.
-description: Google style autocompleter for MooTools that use AJAX request.
-copyright: Copyright (c) Juan Lago D.
-authors: [Juan Lago <juanparati[at]gmail[dot]com>]
 
-requires: 
-  core:1.4.0: 
-  - Element.Event
-  - Element.Event.Delegation
-  - Request.JSON
+name: GooCompleter
+
+description: Google style autocompleter for MooTools that use AJAX request.
+
+version: 1.0
+
+license: MIT-style license
+
+authors:
+  - Juan Lago
+
+requires: [Core/Class, Core/Object, Core/Element.Event, Core/Element.Event.Delegation, Core/Request.JSON]
+
 provides: [GooCompleter]
-A method create autocomplete fields!
+
+...
 */
 
-// MooCompleter class  
+// GooCompleter class  
 var GooCompleter = new Class({
 	
 	Implements: [Options, Events],
