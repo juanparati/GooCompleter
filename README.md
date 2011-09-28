@@ -16,6 +16,12 @@ Features
 + Listbox navigation using keys
 ...
 
+ 
+Screenshots
+-----------
+
+![Screenshot 1](http://www.livespanske.com/labs/GooCompleter/imgs/GooCompleter.png)
+
 
 Dependencies
 ------------
