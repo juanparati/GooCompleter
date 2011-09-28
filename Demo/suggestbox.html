@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>GooCompleter</title>
+
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/base/base-min.css">
+<link rel="stylesheet" type="text/css" media="all" href="css/goocompleter.css" />
+
+<style type="text/css">
+body {
+	padding: 8px;
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+	font-size: 30px;
+	font-weight: bold;
+	color: #202020;
+	text-transform: uppercase; 
+}
+
+/* Override typebox style */
+.goocompleter_typebox 
+{
+	display: inline;
+	position: absolute;
+	left: 400px;
+	color: #FF8000; 
+	width: 300px;
+	height: 22px;
+	background-color: #FFFFC0;
+	padding: 5px;
+	font-size: 18px;
+	border: 2px solid #30C0FF; 
+}
+
+.goocompleter_typebox .goocompleter_suggestion {
+	color: #000;
+	display: inline;
+}
+
+</style>
+
+<script type="text/javascript" src="http://jsfiddle.net/js/lib/mootools-core-1.4.0-full-nocompat.js"></script>
+<script type="text/javascript" src="../Source/GooCompleter.js"></script>
+
+<script type="text/javascript">
+	
+	window.addEvent('domready', function() {
+				 	  
+		var myAutocompleter = new GooCompleter('searchfield', {
+			action: 'webservice.php',	// JSON source
+			param: 'search',			// Param string to send			
+			use_listbox: false,			// Disable listbox					
+			clone_typebox: false		// Don't clone field attributes
+		});
+		
+	});
+	
+</script>
+</head>
+<body>
+	<h1>Suggestbox GooCompleter example</h1>
+  	
+	<p><a href="index.html">&lt;&lt; View basic example</a> | <a href="onlylistbox.html">View only listbox example &gt;&gt;</a></p>
+	<label for="searchfield">Type a country name:</label><br />
+	<input name="searchfield" id="searchfield" class="goocompleter_field" type="text" autocomplete="off" />		
+	
+</body>
+</html>

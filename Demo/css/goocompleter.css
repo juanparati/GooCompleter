@@ -1,0 +1,60 @@
+/* Goocompleter default style */
+
+.goocompleter_field {
+	position: relative;
+	background: url("data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw%3D%3D") repeat scroll 0 0 transparent;
+	z-index: 10;
+	
+	padding: 4px;	
+	font-size: 18px;	
+	width: 300px;
+	border: 2px solid #FF8000
+}
+
+/* Listbox */
+.goocompleter_listbox {
+	position: absolute;
+	display: none;
+	overflow: auto;
+	
+	width: 400px;
+	max-height: 300px;
+	
+	
+	border: 1px solid #000;	
+}
+
+.goocompleter_listbox ul {
+	margin: 0;
+	padding: 0;
+}
+
+.goocompleter_listbox li {
+	cursor: default;
+	list-style-type: none;	
+	
+	padding: 2px;
+}
+
+.goocompleter_listbox li.odd {
+	background-color: #F3F3F3;
+}
+
+.goocompleter_listbox li:hover, .goocompleter_listbox li.odd:hover, .goocompleter_listbox li.selected {
+	background-color: #FF8000;
+	color: #FFF;
+}
+
+/* Typebox */
+.goocompleter_typebox {
+	position: absolute;
+	z-index: 9;
+	overflow: hidden;
+	color: transparent;
+	white-space: nowrap	
+}
+
+.goocompleter_typebox .goocompleter_suggestion {
+	color: #C3C3C3;
+	display: inline;
+}

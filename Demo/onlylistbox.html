@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>GooCompleter</title>
+
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/base/base-min.css">
+<link rel="stylesheet" type="text/css" media="all" href="css/goocompleter.css" />
+
+<style type="text/css">
+body {
+	padding: 8px;
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+	font-size: 30px;
+	font-weight: bold;
+	color: #202020;
+	text-transform: uppercase; 
+}
+</style>
+
+<script type="text/javascript" src="http://jsfiddle.net/js/lib/mootools-core-1.4.0-full-nocompat.js"></script>
+<script type="text/javascript" src="../Source/GooCompleter.js"></script>
+
+<script type="text/javascript">
+	
+	window.addEvent('domready', function() {
+				 	  
+		var myAutocompleter = new GooCompleter('searchfield', {
+			action: 'webservice.php',	// JSON source
+			param: 'search',			// Param string to send			
+			listbox_offset: { y: 2 },	// Listbox offset for Y
+			use_typebox: false,			// Disable typebox (only listbox)
+			delay: 100,					// Delay to 100ms
+		});
+		
+	});
+	
+</script>
+</head>
+<body>
+	<h1>Only listbox example</h1>
+  	
+	<p><a href="suggestbox.html">&lt;&lt; View suggestbox example</a></p>
+	<label for="searchfield">Type a country name:</label><br />
+	<input name="searchfield" id="searchfield" class="goocompleter_field" type="text" autocomplete="off" />		
+	
+</body>
+</html>
