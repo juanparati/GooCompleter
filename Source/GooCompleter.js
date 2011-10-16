@@ -182,37 +182,52 @@ var GooCompleter = new Class({
 		this.field.addEvent('keyup', function(event) {
 			
 			var value = this.field.get('value');
+			var cachevalues = false;
 			
 			// Ignore some key events
 			if (event.key == 'up' || event.key == 'down' || event.key == 'left' || event.key == 'right' || event.key == 'tab')
 				return false;			
 						
-						
-			// Optimize response of typebox
-			if (this.options.use_typebox && this.suggestions.length > 0)
-			{					
-				var cachevalue = this.searchCache(value);
-					
-				if (cachevalue == false)
-					this.typebox.empty();																	
-				else 					
-					this.writeTypebox(cachevalue);														
+									
+			// Optimize reponse
+			if (this.suggestions.length > 0)
+			{				
+				cachevalues = this.searchCache(value);				
+				
+				// Optimize typebox
+				if (this.options.use_typebox)
+				{															
+					if (cachevalues.length > 0 )					
+						this.writeTypebox(cachevalues[0]);																			
+					else
+						this.typebox.empty();																							
+				}
+			
+				// Optimize listbox				
+				if (this.options.use_listbox)
+				{
+					if (cachevalues.length > 0)							
+						this.showSuggestions(cachevalues);
+					else
+						this.listbox.setStyle('display', 'none');		
+				}
+				
 			}
 			
 			if (value.trim() != '' && value.length > this.options.minlen)
 			{							
 			
-				
+								
 				if (this.blocked)				
 					clearTimeout(this.timer);									
 				else
 				{										
 					this.blocked = true;																	
-					
+				
 					this.timer = this.getSuggestions;
 					this.timer.delay(this.options.delay, this);					
-				}				
-								
+				}			
+					
 				
 			}
 			else
@@ -349,12 +364,12 @@ var GooCompleter = new Class({
 	*/
 	searchCache: function (search) {
 		
-		var found = false;
+		var found = new Array();
 		
 		Object.each(this.suggestions, function(value) {
 			
-			if (!found && search.toLowerCase() == value.substr(0, search.length).toLowerCase())			
-				found = value;
+			if (search.toLowerCase() == value.substr(0, search.length).toLowerCase())								
+				found[found.length] = value;
 							
 		});			
 	
@@ -416,7 +431,7 @@ var GooCompleter = new Class({
 			// Move scroll to selected element
 			this.listbox.scrollTo(0, selected.getPosition().y - this.listbox.getPosition().y);									
 			
-			console.log(selected.getPosition(this.listbox).y);
+			//console.log(selected.getPosition(this.listbox).y);
 			
 		}
 		
