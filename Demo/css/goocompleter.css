@@ -51,6 +51,7 @@
 /* Typebox */
 .goocompleter_typebox {
 	position: absolute;
+	top: 0;		/* Prevent show scrollbar (down positioning) */
 	z-index: 9;
 	overflow: hidden;
 	
