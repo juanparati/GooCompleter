@@ -5,7 +5,7 @@ name: GooCompleter
 
 description: Google style autocompleter for MooTools that use AJAX request.
 
-version: 1.0
+version: 1.1
 
 license: MIT-style license
 
@@ -30,6 +30,7 @@ var GooCompleter = new Class({
 		method: 'post',
 		minlen: 0,
 		delay: 1000,
+		hightlight: true,
     
 		use_typebox: true,
 		clone_typebox: true,
@@ -45,11 +46,11 @@ var GooCompleter = new Class({
 		},    
     
 		// Custom events    		          
-		onAfterComplete: function(){}                   
+		onSelected: function(value){}                   
 	},
 	
 	blocked: false,
-	suggestions: new Array(),
+	suggestions: [],
 	
 	
 	/*
@@ -90,7 +91,7 @@ var GooCompleter = new Class({
 				// Reset border color
 				this.typebox.setStyle('border-color', 'transparent');							
 								
-				// Prevent IE 9 padding positioning bug
+				// Prevent IE 9 padding positioning bug without CSS
 				/*
 				if (!Browser.ie9)				
 					this.typebox.setStyles(this.field.getStyles('padding-top'));																				
@@ -131,7 +132,7 @@ var GooCompleter = new Class({
 				
 				event.stop();
 				
-				this.field.set('value', target.get('html'));
+				this.field.set('value', this.normalizeValue(target.get('html')));				
 				
 				if (this.options.use_typebox)
 					this.typebox.empty();
@@ -165,14 +166,14 @@ var GooCompleter = new Class({
 						if (this.options.use_typebox)
 							this.typebox.empty();
 							
-						this.field.set('value', selected.get('html'));
+						this.field.set('value', this.normalizeValue(selected.get('html')));							
+						this.fireEvent('onSelected', selected.get('html'));
 					}
 				
 					event.stop();
 									
 				}
-			
-				
+							
 			}.bind(this));
 			
 		}
@@ -308,12 +309,25 @@ var GooCompleter = new Class({
 		
 				
 			Object.each(suggestions, function(value) {
+				
+				var html_value = value;
 			
 				// Show new result list
 				if (this.options.use_listbox)
-				{				
+				{	
+										
+					if (this.options.hightlight)
+					{
+						// This way is more faster than the regular expressions method
+						html_value = value.substr(0, this.field.get('value').length) + '<span class="goocompleter_hightlight">';
+						html_value = html_value + value.substr(this.field.get('value').length) + '</span>';
+						
+						//html_value = value.substr(0, this.field.get('value').length) + value.substr(this.field.get('value').length).bold();
+					}
+								
+					
 					new Element('li', {
-						html: value,
+						html: html_value,
 						'class': style
 					}).inject(this.listbox.getElement('ul'));
 				
@@ -437,6 +451,21 @@ var GooCompleter = new Class({
 		
 		return selected;
 				
+	},
+	
+	/* 
+	Function: normalizeValue
+		Private method
+		
+		Normalize a value from a list box (strip html)
+	*/
+	normalizeValue: function(value) {
+		
+		// We could use stripTags() but we need String.Extras
+		// return value.stripTags('span');
+		
+		value = value.replace('<span class="goocompleter_hightlight">', '');
+		return value.replace('</span>', '');
 	},
 	
 	/*	

@@ -31,7 +31,8 @@ h1 {
 				 	  
 		var myAutocompleter = new GooCompleter('searchfield', {
 			action: 'webservice.php',	// JSON source
-			param: 'search',			// Param string to send			
+			param: 'search',			// Param string to send		
+			minlen: 0,
 			listbox_offset: { y: 2 },	// Listbox offset for Y			
 			delay: 500					// Request delay to 0.5 seconds
 		});

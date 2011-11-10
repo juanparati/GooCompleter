@@ -64,3 +64,8 @@
 	color: #C3C3C3;
 	display: inline;
 }
+
+/* Highlight or remark */
+.goocompleter_hightlight {
+	font-weight: bold;
+}
