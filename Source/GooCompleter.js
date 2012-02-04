@@ -30,7 +30,7 @@ var GooCompleter = new Class({
 		method: 'post',
 		minlen: 0,
 		delay: 1000,
-		hightlight: true,
+		hightlight: true,		
     
 		use_typebox: true,
 		clone_typebox: true,

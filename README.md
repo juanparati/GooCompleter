@@ -26,7 +26,7 @@ Screenshots
 Dependencies
 ------------
 
-+ Mootools 1.4.0
++ Mootools 1.4.2
 	+ Element.Event
   + Element.Event.Delegation
   + Request.JSON
