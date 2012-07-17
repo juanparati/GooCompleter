@@ -5,7 +5,7 @@ name: GooCompleter
 
 description: Google style autocompleter for MooTools that use AJAX request.
 
-version: 1.1
+version: 1.3
 
 license: MIT-style license
 
