@@ -12,7 +12,7 @@ license: MIT-style license
 authors:
   - Juan Lago
 
-requires: [Core/Class, Core/Object, Core/Element.Event, Core/Element.Event.Delegation, Core/Request.JSON]
+requires: [Core/Class, Core/Object, Core/Element.Event, Core/Element.Event.Delegation, Core/Request.JSON, More/Element.Forms]
 
 provides: [GooCompleter]
 
@@ -108,6 +108,7 @@ var GooCompleter = new Class({
 			// Prevent focus lost
 			this.typebox.addEvent('click', function() {
 				this.field.focus();
+				this.field.selectRange(0, this.field.get("value").length);
 			}.bind(this));			
 					
 		}
@@ -156,6 +157,12 @@ var GooCompleter = new Class({
 			
 			// Navigate between listbox
 			this.field.addEvent('keydown', function(event) {
+
+				if (event.key == 'enter')
+				{
+					this.listbox.setStyle('display', 'none');
+					event.stop();
+				}
 								
 				if (event.key == 'up' || event.key == 'down')
 				{
@@ -186,7 +193,7 @@ var GooCompleter = new Class({
 			var cachevalues = false;
 			
 			// Ignore some key events
-			if (event.key == 'up' || event.key == 'down' || event.key == 'left' || event.key == 'right' || event.key == 'tab')
+			if (event.key == 'up' || event.key == 'down' || event.key == 'left' || event.key == 'right' || event.key == 'tab' || event.key == 'enter')
 				return false;			
 						
 									
