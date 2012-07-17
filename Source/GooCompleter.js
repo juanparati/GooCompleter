@@ -33,6 +33,7 @@ var GooCompleter = new Class({
 		hightlight: true,		
     
 		use_typebox: true,
+		autoselect_typebox: false,
 		clone_typebox: true,
 		typebox_offset : {
 			x: 0,
@@ -108,6 +109,10 @@ var GooCompleter = new Class({
 			// Prevent focus lost
 			this.typebox.addEvent('click', function() {
 				this.field.focus();
+				
+				if (this.options.autoselect_typebox)
+					this.field.select();								
+					
 			}.bind(this));			
 					
 		}
@@ -156,6 +161,12 @@ var GooCompleter = new Class({
 			
 			// Navigate between listbox
 			this.field.addEvent('keydown', function(event) {
+				
+				if (event.key == 'enter')
+				{
+					this.listbox.setStyle('display', 'none');
+					event.stop();
+				}
 								
 				if (event.key == 'up' || event.key == 'down')
 				{
@@ -186,7 +197,7 @@ var GooCompleter = new Class({
 			var cachevalues = false;
 			
 			// Ignore some key events
-			if (event.key == 'up' || event.key == 'down' || event.key == 'left' || event.key == 'right' || event.key == 'tab')
+			if (event.key == 'up' || event.key == 'down' || event.key == 'left' || event.key == 'right' || event.key == 'tab' || event.key == 'enter')
 				return false;			
 						
 									
