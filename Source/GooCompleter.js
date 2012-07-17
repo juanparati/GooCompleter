@@ -476,6 +476,7 @@ var GooCompleter = new Class({
 		// return value.stripTags('span');
 		
 		value = value.replace('<span class="goocompleter_hightlight">', '');
+		value = value.replace('<span class="goocompleter_hightlight selected">', '');	// IceWeasel Fix?
 		return value.replace('</span>', '');
 	},
 	
